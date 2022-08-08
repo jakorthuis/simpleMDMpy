@@ -77,6 +77,12 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
         url = self.url + "/" + str(device_id) + "/users"
         return self._get_data(url)
 
+    def delete_user(self, device_id, user_id):
+        """Deletes a user from the device. Available for supervised macOS devices only. 
+        This command will return HTTP 422 Unprocessable Entity for unsupported devices. """
+        url = self.url + "/" + str(device_id) + "/users/" + str(user_id)
+        return self._delete_data(url)
+
     def push_apps_device(self, device_id):
         """You can use this method to push all assigned apps
         to a device that are not already installed."""
